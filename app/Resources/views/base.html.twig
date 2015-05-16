@@ -3,11 +3,29 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        
+        {% block nav %}
+        <ul class="nav nav-pills">
+            <li role="presentation"><a href="{{ path('products') }}">Produkty</a></li>
+            <li role="presentation"><a href="{{ path('basket') }}">Koszyk</a></li>
+        </ul>
+        {% endblock %}
+        
+        <div class="container">        
+            {% block side %}{% endblock %}        
+            {% block body %}{% endblock %}
+            {% block footer %}{% endblock %}        
+        </div>
+        
+        {% block javascripts %}
+            <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        {% endblock %}
     </body>
 </html>

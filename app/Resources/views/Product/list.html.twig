@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}AppBundle:Product:list{% endblock %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nazwa</th>
+                <th>Cena</th>
+                <th>Akcja</th>
+            </tr>                
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>
+                        <a href="{{ path('product', {'id': product.id}) }}" class="btn btn-primary">Pokaż</a>
+                        <a href="{{ path('add_to_basket', {'id': product.id}) }}" class="btn btn-danger">Dodaj do koszyka</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
