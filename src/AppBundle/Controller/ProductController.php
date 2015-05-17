@@ -8,17 +8,20 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ProductController extends Controller
 {
     /**
-     * @Route("/product/{id}", name="product")
+     * @Route("/product/{id}", name="product", requirements={"id": "\d+"})
      */
-    public function showAction($id)
+    public function showAction(\AppBundle\Entity\Product $product)
     {
-        $products = $this->getProducts();
-        if (!array_key_exists($id, $products)) {
-            $this->createNotFoundException('Produkt o takim id nie istnieje');
-        }
+//        $product = $this->getDoctrine()
+//            ->getRepository('AppBundle:Product')
+//            ->find($id);
+//
+//        if (!$product) {
+//            $this->createNotFoundException('Produkt o danym ID nie istnieje');
+//        }
 
         return $this->render('Product/show.html.twig', [
-            'product' => $products[$id],
+            'product' => $product,
         ]);
     }
 
@@ -27,27 +30,13 @@ class ProductController extends Controller
      */
     public function listAction()
     {
+        $products = $this->getDoctrine()
+            ->getRepository('AppBundle:Product')
+            ->findAll()
+        ;
 
         return $this->render('Product/list.html.twig', array(
-            'products' => $this->getProducts(),
+            'products' => $products,
         ));
     }
-
-    public function getProducts()
-    {
-        $file = file('product.txt');
-        $products = array();
-        foreach ($file as $p) {
-            $e = explode(':', trim($p));
-            $products[$e[0]] = array(
-                'id' => $e[0],
-                'name' => $e[1],
-                'price' => $e[2],
-                'desc' => $e[3],
-            );
-        }
-
-        return $products;
-    }
-
 }

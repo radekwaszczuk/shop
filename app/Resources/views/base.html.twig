@@ -18,7 +18,9 @@
         {% endblock %}
         
         <div class="container">        
-            {% block side %}{% endblock %}        
+            {% block side %}
+                {{ render(controller('AppBundle:Category:list')) }}
+            {% endblock %}        
             {% block body %}{% endblock %}
             {% block footer %}{% endblock %}        
         </div>
