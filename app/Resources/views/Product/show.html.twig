@@ -1,5 +1,8 @@
 {% extends "base.html.twig" %}
 
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% form_theme productForm 'bootstrap_3_layout.html.twig' %}
+
 {% block title %}AppBundle:Product:show{% endblock %}
 
 {% block body %}
@@ -7,5 +10,33 @@
         <h1>{{ product.name }}</h1>
         <p>{{ product.description }}</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Dodaj do koszyka</a></p>
+        
+        {{ form_start(productForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                        
+            <button type="submit" class="btn btn-primary">Zapisz zmiany</button>
+        
+        {{ form_end(productForm) }}
+               
     </div>
+        
+        
+        
+        
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+        
+        {{ form_row(form.comment) }}
+                
+        <button type="submit" class="btn btn-primary">Dodaj komentarz</button>
+        
+    {{ form_end(form) }}
+    
+    
+    <div>
+        {% for comment in product.comments %}
+            Data: {{ comment.createdAt|date('d-m-Y') }}<br>
+            {{ comment.comment }}<br>
+            <hr>
+        {% endfor %}
+    </div>
+        
 {% endblock %}

@@ -3,12 +3,22 @@
 {% block title %}AppBundle:Product:list{% endblock %}
 
 {% block body %}
+    
+    {{ form_start(form) }}
+        {{ form_row(form.keyword) }}
+        <button type="submit" class="btn btn-danger">Szukaj</button>
+    {{ form_end(form) }}
+    
+    
+    Liczba rekordów: {{ products.getTotalItemCount }}
+    
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Nazwa</th>
-                <th>Cena</th>
+                <th>{{ knp_pagination_sortable(products, 'ID', 'p.id') }}</th>
+                <th>{{ knp_pagination_sortable(products, 'Nazwa', 'p.name') }}</th>
+                <th>{{ knp_pagination_sortable(products, 'Cena', 'p.price') }}</th>
+                <th>{{ knp_pagination_sortable(products, 'Kategoria', 'c.name') }}</th>
                 <th>Akcja</th>
             </tr>                
         </thead>
@@ -18,6 +28,7 @@
                     <td>{{ product.id }}</td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.price }}</td>
+                    <td>{{ product.category.name }}</td>
                     <td>
                         <a href="{{ path('product', {'id': product.id}) }}" class="btn btn-primary">Pokaż</a>
                         <a href="{{ path('add_to_basket', {'id': product.id}) }}" class="btn btn-danger">Dodaj do koszyka</a>
@@ -26,4 +37,7 @@
             {% endfor %}
         </tbody>
     </table>
+            
+    {{ knp_pagination_render(products) }}
+            
 {% endblock %}
