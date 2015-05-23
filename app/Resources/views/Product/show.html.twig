@@ -21,15 +21,14 @@
         
         
         
-        
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        
-        {{ form_row(form.comment) }}
-                
-        <button type="submit" class="btn btn-primary">Dodaj komentarz</button>
-        
-    {{ form_end(form) }}
-    
+    {% if is_granted('ROLE_USER') %}    
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}        
+            {{ form_row(form.comment) }}                
+            <button type="submit" class="btn btn-primary">Dodaj komentarz</button>
+        {{ form_end(form) }}
+    {% else %}
+        <p>Aby napisać komentarz musisz być zalogowany</p>
+    {% endif %}
     
     <div>
         {% for comment in product.comments %}

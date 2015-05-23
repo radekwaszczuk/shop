@@ -1,16 +1,18 @@
 <?php
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- * Description of MyFirstModel
- *
- * @author radek
- */
+namespace AppBundle\Model;
+
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+
+
 class MyFirstModel
 {
-    //put your code here
+
+    public function getXMLRecord()
+    {
+        // some action
+
+        return;
+    }
 }
