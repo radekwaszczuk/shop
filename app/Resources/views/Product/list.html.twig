@@ -9,8 +9,9 @@
         <button type="submit" class="btn btn-danger">Szukaj</button>
     {{ form_end(form) }}
     
+    {{ message }}
     
-    Liczba rekordów: {{ products.getTotalItemCount }}
+    {{ 'total_product_count'|trans }}: {{ products.getTotalItemCount }}
     
     <table class="table table-striped">
         <thead>
@@ -30,7 +31,7 @@
                     <td>{{ product.price }}</td>
                     <td>{{ product.category.name }}</td>
                     <td>
-                        <a href="{{ path('product', {'id': product.id}) }}" class="btn btn-primary">Pokaż</a>
+                        <a href="{{ path('product', {'slug': product.slug}) }}" class="btn btn-primary">Pokaż</a>
                         <a href="{{ path('add_to_basket', {'id': product.id}) }}" class="btn btn-danger">Dodaj do koszyka</a>
                     </td>
                 </tr>

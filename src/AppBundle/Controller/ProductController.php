@@ -14,7 +14,7 @@ use AppBundle\Form\SearchProductsType;
 class ProductController extends Controller
 {
     /**
-     * @Route("/product/{id}", name="product", requirements={"id": "\d+"})
+     * @Route("/product/{slug}", name="product")
      */
     public function showAction(\AppBundle\Entity\Product $product, Request $request)
     {
@@ -47,6 +47,7 @@ class ProductController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setProduct($product);
+            $comment->setUser($this->getUser());
 
             $em->persist($comment);
             $em->flush();
@@ -95,9 +96,12 @@ class ProductController extends Controller
             10/*limit per page*/
         );
 
+        $message = $this->get('translator')->trans('message');
+
         return $this->render('Product/list.html.twig', array(
             'products' => $pagination,
             'form' => $form->createView(),
+            'message' => $message,
         ));
     }
 }

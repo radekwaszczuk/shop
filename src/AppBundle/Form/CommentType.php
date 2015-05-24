@@ -18,9 +18,11 @@ class CommentType extends AbstractType
     {
         $builder
             ->add('comment', 'textarea', [
-                'label' => 'Twój komentarz',
+                'label' => 'form.comment',
                 'constraints' => [
-                    new Assert\NotBlank(),
+                    new Assert\NotBlank([
+                        'message' => 'comment.not_blank'
+                    ]),
                 ],
             ])
         ;

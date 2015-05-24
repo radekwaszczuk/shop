@@ -14,6 +14,22 @@
         <ul class="nav nav-pills">
             <li role="presentation"><a href="{{ path('products') }}">Produkty</a></li>
             <li role="presentation"><a href="{{ path('basket') }}">Koszyk</a></li>
+            
+            <li role="presentation"><a href="{{ path('set_locale', {'locale': 'en'}) }}">EN</a></li> 
+            <li role="presentation"><a href="{{ path('set_locale', {'locale': 'pl'}) }}">PL</a></li>
+            
+            
+            {% if app.user %}
+                <li role="presentation"><a href="{{ path('fos_user_profile_show') }}">Profil</a></li>
+                <li role="presentation"><a href="{{ path('fos_user_security_logout') }}">Wyloguj</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li role="presentation"><a href="{{ path('admin') }}">Panel admina</a></li>
+                {% endif %}
+            {% else %}
+                <li role="presentation"><a href="{{ path('fos_user_security_login') }}">Zaloguj</a></li>
+                <li role="presentation"><a href="{{ path('fos_user_registration_register') }}">Zarejestruj</a></li>
+            {% endif %}
+            
         </ul>
         {% endblock %}
         

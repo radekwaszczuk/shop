@@ -1,6 +1,11 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+    prefix: /{_locale}
+    defaults:  { _locale: pl }
+    requirements:
+        _locale: |pl|en
+    
     
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/"

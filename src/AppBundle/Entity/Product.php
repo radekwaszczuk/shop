@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Product
@@ -27,6 +28,12 @@ class Product
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
 
     /**
      * @var string
@@ -60,6 +67,11 @@ class Product
      */
     private $comments;
 
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 
     /**
      * Get id
