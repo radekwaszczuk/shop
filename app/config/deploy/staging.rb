@@ -16,7 +16,7 @@ set :composer_options,  "--verbose --prefer-dist --optimize-autoloader --no-prog
 role :web,           "91.228.196.87"                         # Your HTTP server, Apache/etc
 role :app,           "91.228.196.87", :primary => true       # This may be the same as your `Web` server
 
-set :webserver_user,      "apache"
+set :webserver_user,      "www-data"
 
 task :upload_parameters do
     origin_file = "app/config/deploy/staging_parameters.yml"
